@@ -24,8 +24,9 @@ public class Feature {
     static final Int2ObjectMap<List<IStateStack<?>>> maskToFeaturesMap = new Int2ObjectOpenHashMap<>();
 
     static List<IStateStack<?>> maskToFeatures(int mask) {
-        if(maskToFeaturesMap.containsKey(mask)) {
-            return maskToFeaturesMap.get(mask);
+        final List<IStateStack<?>> states = maskToFeaturesMap.get(mask);
+        if(states != null) {
+            return states;
         }
 
         final Set<IStateStack<?>> features = new HashSet<>();
@@ -97,6 +98,7 @@ public class Feature {
             , GLStateManager.lightStates[6] // GL_LIGHT6
             , GLStateManager.lightStates[7] // GL_LIGHT7
             , GLStateManager.lightingState // GL_LIGHTING flag
+            , GLStateManager.rescaleNormalState // GL_RESCALE_NORMAL flag
             // GL_LINE_SMOOTH flag
             // GL_LINE_STIPPLE flag
             // GL_INDEX_LOGIC_OP flag
